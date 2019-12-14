@@ -34,6 +34,7 @@ class Robot{
 	}
 
 	obtainRoomDimensions(x_lim, y_lim){
+		let totalPoints = (x_lim * y_lim) + (x_lim + y_lim) + 1
 
 		if (typeof x_lim !== "number" && typeof y_lim !== "number"){
 			throw new Error("You did not enter integers for the coordinates")
@@ -43,6 +44,9 @@ class Robot{
 		throw new Error("The room dimensions cannot be less than the initial position of the hoover")
 	   }
 
+	   if(totalPoints < this.dirtpoint_array.length){
+			throw new Error("The number of dirtpoints cannot be greater than the area of the room")
+	   }
 
 		this.roomDimensions = new Room(x_lim, y_lim);
 
@@ -50,15 +54,20 @@ class Robot{
 
 
 	processInstructions(str){
+		console.log(str)
+
+		let regex = /NEWS/
 
 		if (typeof str !== "string"){
 			throw new Error("Instructions were not in a string format")
 		}
 
-		let directions = str.toUpperCase();
+		// if (regex.test(str) === false){
+		// 	throw new Error("Invalid set of instructions")
+		// }
 
-		for (let i = 0; i < directions.length; i++){
-			this.move(directions[i])
+		for (let i = 0; i < str.length; i++){
+			this.move(str[i])
 		}
 
 		this.logger(this.x, this.y)
@@ -129,9 +138,6 @@ class Robot{
 
 // Type checks on input
 // duplicates
-// large number of dirtpoints
-// dirtpoints being out of bounds
-// inital location being out of bounds
 // floats/decimals
 
 

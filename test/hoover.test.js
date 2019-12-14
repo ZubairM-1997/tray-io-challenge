@@ -25,17 +25,6 @@ describe("Robot Contructor" , () => {
 
 	})
 
-	test("The array of dirtpoints must be inside a 2D array" ,() => {
-		let x = 1
-		let y = 5
-		let dirtpointArray = [1, 2, 4, 1, 2]
-
-
-		expect(() => {
-			new Robot(x, y, dirtpointArray, () => {})
-		}).toThrow();
-
-	})
 })
 
 describe("Room dimensions" , () => {
@@ -68,6 +57,20 @@ describe("Room dimensions" , () => {
 			roomba.obtainRoomDimensions(x_lim, y_lim)
 		}).toThrow();
 
+	})
+
+	test("The number of dirtpoints can only be inside the room" , () => {
+		let x = 1
+		let y = 2
+		let dirtpointArray = [[1,3], [3,4], [5, 1], [2,6], [4,5], [3,7], [8, 0], [6,8], [5, 4], [3, 2], [5,6], [7,5], [9, 3], [2, 1], [4, 4], [6, 3], [8, 9], [3, 9]]
+		let roomba = new Robot(x, y, dirtpointArray, () => {})
+
+		let x_lim = 3
+		let y_lim = 3
+
+		expect(() => {
+			roomba.obtainRoomDimensions(x_lim, y_lim)
+		}).toThrow();
 
 	})
 
@@ -81,8 +84,16 @@ describe("Process instructions", () => {
 		let roomba = new Robot(x, y, dirtpointArray, () => {})
 
 		let instructions = [1 ,2 ,34, "N"]
+		let invalidInstructions = "73HDO999382"
+
 		expect(() => {
 			roomba.processInstructions(instructions)
+		}).toThrow();
+	})
+
+	test("Instructions should only contain the characters NEWS" ,() => {
+		expect(() => {
+			roomba.processInstructions(invalidInstructions)
 		}).toThrow();
 
 	})
