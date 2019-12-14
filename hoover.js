@@ -37,7 +37,7 @@ class Robot{
 	obtainRoomDimensions(x_lim, y_lim){
 
 		if ( x_lim % 1 !== 0 && y_lim % 1 !== 0){
-			throw Error("Coordinates should not be integers")
+			throw Error("Coordinates should be integers")
 		}
 
 		if (typeof x_lim !== "number" && typeof y_lim !== "number"){
