@@ -11,7 +11,8 @@ describe("Robot Contructor" , () => {
 		let y = 3
 		let dirtpointArray = [[1,3], [3,4], [5, 1]]
 
-		let robot = new Robot(x, y, dirtpointArray, () => {})
+		let roomba = new Robot(x, y, dirtpointArray, () => {})
+		expect(roomba).toBeInstanceOf(Robot)
 	})
 
 	test("Coordinates should not be anything other that integers" , () => {

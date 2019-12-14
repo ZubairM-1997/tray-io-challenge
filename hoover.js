@@ -37,7 +37,7 @@ class Robot{
 	obtainRoomDimensions(x_lim, y_lim){
 
 		if ( x_lim % 1 !== 0 && y_lim % 1 !== 0){
-			throw Error("Coordinates should be integers")
+			throw Error("Coordinates should not be floats")
 		}
 
 		if (typeof x_lim !== "number" && typeof y_lim !== "number"){
@@ -61,15 +61,15 @@ class Robot{
 
 	processInstructions(str){
 
-		let regex = /NEWS/
+		let regex = /^[NESW]+$/
 
 		if (typeof str !== "string"){
 			throw new Error("Instructions were not in a string format")
 		}
 
-		// if (regex.test(str) === false){
-		// 	throw new Error("Invalid set of instructions")
-		// }
+		if (regex.test(str) === false){
+			throw new Error("Invalid set of instructions")
+		}
 
 		for (let i = 0; i < str.length; i++){
 			this.move(str[i])
