@@ -15,6 +15,7 @@ class Robot{
 			 throw Error("You did not enter integers for the coordinates")
 		}
 
+
 		for (let i = 0; i++; i < dirtpoint_array.length){
 			if(Array.isArray(dirtpoint_array[i] === false)) {
 				throw Error("Dirtpoint coordinates must be in a 2D Array!")
@@ -34,9 +35,15 @@ class Robot{
 	}
 
 	obtainRoomDimensions(x_lim, y_lim){
+
+		if ( x_lim % 1 !== 0 && y_lim % 1 !== 0){
+			throw Error("Coordinates should not be integers")
+		}
+
 		let totalPoints = (x_lim * y_lim) + (x_lim + y_lim) + 1
 
-		if (typeof x_lim !== "number" && typeof y_lim !== "number"){
+
+		if(typeof x_lim !== "number" && typeof y_lim !== "number"){
 			throw new Error("You did not enter integers for the coordinates")
 	   }
 
@@ -54,7 +61,6 @@ class Robot{
 
 
 	processInstructions(str){
-		console.log(str)
 
 		let regex = /NEWS/
 

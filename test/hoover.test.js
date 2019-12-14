@@ -25,9 +25,31 @@ describe("Robot Contructor" , () => {
 
 	})
 
+
 })
 
 describe("Room dimensions" , () => {
+
+	test("Dimensions should not be float" ,() => {
+		let x = 2
+		let y = 3
+		let dirtpointArray = [[1,2], [2,1], [3,1]]
+
+		let roomba = new Robot(x, y, dirtpointArray, () => {})
+
+		let x_lim = 3.5
+		let y_lim = 4.6
+
+		expect(() => {
+			roomba.obtainRoomDimensions(x_lim, y_lim)
+		}).toThrow();
+
+
+	})
+
+
+
+
 	test("dimensions should be integers", () => {
 		let x = 2
 		let y = 3
