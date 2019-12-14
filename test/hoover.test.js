@@ -22,7 +22,7 @@ describe("Robot Contructor" , () => {
 
 		expect(() => {
 			new Robot(x, y, dirtpointArray, () => {})
-		}).toThrow();
+		}).toThrow(TypeError);
 
 	})
 
@@ -107,7 +107,7 @@ describe("Process instructions", () => {
 
 		expect(() => {
 			roomba.processInstructions(instructions)
-		}).toThrow();
+		}).toThrow(TypeError);
 	})
 
 	test("Instructions should only contain the characters NEWS" ,() => {
@@ -127,8 +127,14 @@ describe("Process instructions", () => {
 })
 
 
+describe("Funtionality Test", () => {
+	test("Input Checks", () => {
 
+		expect(() => {
+			roomba.processInstructions(instructions)
+		}).toThrow(TypeError)
+	})
 
-
+})
 
 

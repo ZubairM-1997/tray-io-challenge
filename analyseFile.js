@@ -31,11 +31,13 @@ function processFile(contents){
 
 
 
+
 	let twoDimensionArray = []
 
 	for (let i = 2; i < result.length - 1; i++){
 		let small_array = []
 		let dirtCoordinate = result[i].split(" ")
+
 
 		let x_dirt = parseInt(dirtCoordinate[0], 10)
 		let y_dirt = parseInt(dirtCoordinate[1], 10)

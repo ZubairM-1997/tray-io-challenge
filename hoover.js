@@ -11,15 +11,14 @@ class Room{
 class Robot{
 	constructor(x , y, dirtpoint_array, logger){
 
-		if (typeof x !== "number" && typeof y !== "number"){
-			 throw Error("You did not enter integers for the coordinates")
+		if (isNaN(x) || isNaN(y)){
+			 throw TypeError("Unrecognisable coordinates entered")
 		}
 
-		for (let i = 0; i++; i < dirtpoint_array.length){
-			if(Array.isArray(dirtpoint_array[i] === false)) {
-				throw Error("Dirtpoint coordinates must be in a 2D Array!")
-			}
+		if (x < 0 || y < 0){
+			throw Error(`Hoover should not have negative starting position, ${x}, ${y}`)
 		}
+
 
 		this.x = x
 		this.y = y
@@ -35,22 +34,25 @@ class Robot{
 
 	obtainRoomDimensions(x_lim, y_lim){
 
-		if ( x_lim % 1 !== 0 && y_lim % 1 !== 0){
-			throw Error("Coordinates should not be floats")
+		if ( x_lim % 1 !== 0 || y_lim % 1 !== 0){
+			throw new Error("Coordinates should not be floats")
 		}
 
-		if (typeof x_lim !== "number" && typeof y_lim !== "number"){
-			throw new Error("Coordinates should be numbers only")
+		if (isNaN(x_lim) || isNaN(y_lim)){
+			throw new TypeError("Invalid set of coordinates entered")
 	   }
 
-	   if (x_lim < this.x && y_lim < this.y){
+	   if (x_lim < this.x || y_lim < this.y){
 			throw new Error("The hoover must be placed inside the room")
 	   }
 
 	   for (let i = 0; i < this.dirtpoint_array.length; i++){
-		   if(this.dirtpoint_array[i][0] > x_lim && this.dirtpoint_array[i][1] > y_lim){
-				throw new Error("The room must contain all the dirtpoints")
+		   if(this.dirtpoint_array[i][0] > x_lim || this.dirtpoint_array[i][1] > y_lim){
+				throw new Error(`Dirtpoint cordinates ${this.dirtpoint_array[i][0]} , ${this.dirtpoint_array[i][1]} needs to lie within the room dimensins ${x_lim}, ${y_lim}`)
 		   }
+		   else if(this.dirtpoint_array[i][0] < 0 || this.dirtpoint_array[i][1] < 0){
+				throw new Error(`Dirtpoint cordinates, ${this.dirtpoint_array[i][0]} , ${this.dirtpoint_array[i][1]} cannot be less that 0 `)
+	   }
 	   }
 
 		this.roomDimensions = new Room(x_lim, y_lim);
@@ -63,21 +65,19 @@ class Robot{
 		let regex = /^[NESW]+$/
 
 		if (typeof str !== "string"){
-			throw new Error("Instructions were not in a string format")
+			throw new TypeError("Instructions were not in a string format")
 		}
 
 		if (regex.test(str) === false){
-			throw new Error("Invalid set of instructions")
+			throw new Error("No or Invalid set of instructions were entered")
 		}
 
 		for (let i = 0; i < str.length; i++){
 			this.move(str[i])
 		}
 
-		this.logger(this.x, this.y)
-		this.logger(this.pointsCleaned)
-
-
+		this.logger(`The final coordinates of the hoover are ${this.x}, ${this.y}`)
+		this.logger(`The number of points cleaned by the hoover are ${this.pointsCleaned}`)
 	}
 
 	move(char){
@@ -100,10 +100,7 @@ class Robot{
 				break;
 
 		}
-
 		this.withinBoundary(this.x, this.y)
-
-
 	}
 
 
@@ -128,21 +125,10 @@ class Robot{
 					this.pointsCleaned++
 					this.alreadyCleaned[i] = true
 				}
-
 			}
-
 		}
-
-
 	}
-
-
-
 }
-
-
-
-
 
 
 
