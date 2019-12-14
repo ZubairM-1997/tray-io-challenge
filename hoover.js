@@ -15,7 +15,6 @@ class Robot{
 			 throw Error("You did not enter integers for the coordinates")
 		}
 
-
 		for (let i = 0; i++; i < dirtpoint_array.length){
 			if(Array.isArray(dirtpoint_array[i] === false)) {
 				throw Error("Dirtpoint coordinates must be in a 2D Array!")
@@ -41,11 +40,11 @@ class Robot{
 		}
 
 		if (typeof x_lim !== "number" && typeof y_lim !== "number"){
-			throw new Error("You did not enter integers for the coordinates")
+			throw new Error("Coordinates should be numbers only")
 	   }
 
 	   if (x_lim < this.x && y_lim < this.y){
-			throw new Error("The room dimensions cannot be less than the initial position of the hoover")
+			throw new Error("The hoover must be placed inside the room")
 	   }
 
 	   for (let i = 0; i < this.dirtpoint_array.length; i++){

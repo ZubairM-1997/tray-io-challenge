@@ -26,7 +26,6 @@ describe("Robot Contructor" , () => {
 
 	})
 
-
 })
 
 describe("Room dimensions" , () => {
@@ -49,8 +48,6 @@ describe("Room dimensions" , () => {
 	})
 
 
-
-
 	test("dimensions should be integers", () => {
 		let x = 2
 		let y = 3
@@ -66,7 +63,7 @@ describe("Room dimensions" , () => {
 
 	})
 
-	test("The dimensions of the room must be greater than the coordinates of the Hoover" , () => {
+	test("The hoover must be placed inside the room" , () => {
 
 		let x = 6
 		let y = 6
@@ -106,8 +103,7 @@ describe("Process instructions", () => {
 		let dirtpointArray = [[1,3], [3,4], [5, 1]]
 		let roomba = new Robot(x, y, dirtpointArray, () => {})
 
-		let instructions = [1 ,2 ,34, "N"]
-		let invalidInstructions = "73HDO999382"
+		let instructions = [1 ,2 , 34, "N"]
 
 		expect(() => {
 			roomba.processInstructions(instructions)
@@ -115,6 +111,14 @@ describe("Process instructions", () => {
 	})
 
 	test("Instructions should only contain the characters NEWS" ,() => {
+
+		let x = 2
+		let y = 3
+		let dirtpointArray = [[1,3], [3,4], [5, 1]]
+		let roomba = new Robot(x, y, dirtpointArray, () => {})
+
+		let invalidInstructions = "73HDO999382"
+
 		expect(() => {
 			roomba.processInstructions(invalidInstructions)
 		}).toThrow();
