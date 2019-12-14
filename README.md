@@ -30,25 +30,7 @@ Instantly, I realised this is an Object-Oriented based Problem, however I did no
 Another issue was that I obviously had to find a way to read the input values on the input.txt file and feel them to the Robot  constructor and its methods, while making sure they are converted to the correct types.
 
 ### File Structure
-Project
-	|
-	+-- node_modules
-	|
-	+-- README.md
-	|
-	+-- package.json
-	|
-	+-- package-lock.json
-	|
-	+-- input.txt
-	|
-	+-- hoover.js
-	|
-	+-- analyseFile.js
-	|
-	+-- test
-		|
-		+--hoover.test.js
+![alt text](file_structure.png)
 
 ### Getting started
 1) Make sure you have the latest version of node installed
