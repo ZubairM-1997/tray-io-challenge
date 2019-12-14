@@ -9,11 +9,24 @@ class Room{
 
 
 class Robot{
-	constructor(x , y, dirtpoint_array){
+	constructor(x , y, dirtpoint_array, logger){
+
+		if (typeof x !== "number" && typeof y !== "number"){
+			 throw Error("You did not enter integers for the coordinates")
+		}
+
+		for (let i = 0; i++; i < dirtpoint_array.length){
+			if(Array.isArray(dirtpoint_array[i] === false)) {
+				throw Error("Dirtpoint coordinates must be in a 2D Array!")
+			}
+		}
 
 		this.x = x
 		this.y = y
+
+
 		this.dirtpoint_array = dirtpoint_array
+		this.logger = logger
 		this.alreadyCleaned = new Array(dirtpoint_array.length);
 		this.alreadyCleaned.fill(false);
 		this.pointsCleaned = 0;
@@ -21,6 +34,16 @@ class Robot{
 	}
 
 	obtainRoomDimensions(x_lim, y_lim){
+
+		if (typeof x_lim !== "number" && typeof y_lim !== "number"){
+			throw new Error("You did not enter integers for the coordinates")
+	   }
+
+	   if (x_lim < this.x && y_lim < this.y){
+		throw new Error("The room dimensions cannot be less than the initial position of the hoover")
+	   }
+
+
 		this.roomDimensions = new Room(x_lim, y_lim);
 
 	}
@@ -29,7 +52,7 @@ class Robot{
 	processInstructions(str){
 
 		if (typeof str !== "string"){
-			return null
+			throw new Error("Instructions were not in a string format")
 		}
 
 		let directions = str.toUpperCase();
@@ -38,8 +61,8 @@ class Robot{
 			this.move(directions[i])
 		}
 
-		console.log(this.x, this.y)
-		console.log(this.pointsCleaned)
+		this.logger(this.x, this.y)
+		this.logger(this.pointsCleaned)
 
 
 	}
@@ -114,68 +137,4 @@ class Robot{
 
 
 
-let fs = require("fs")
-
-let contents;
-let result;
-
-let twoDimensionArray = []
-
-let x_limit;
-let y_limit;
-
-let x;
-let y;
-
-
-
-
-
-const readFile = fs.readFile("./input.txt", 'utf8', function(err, data) {
-
-	if(err){
-		throw err;
-	}
-
-	contents = data
-	processFile()
-
-});
-
-function processFile(){
-	result = contents.split("\n").filter(item => item.length > 0);
-
-	let gridDimensions = result[0].split(" ");
-	x_limit = parseInt(gridDimensions[0] , 10)
-	y_limit = parseInt(gridDimensions[1] , 10)
-
-	let initalPosition = result[1].split(" ")
-	 x = parseInt(initalPosition[0] , 10);
-	 y = parseInt(initalPosition[1] , 10);
-
-
-
-
-
-	for (let i = 2; i < result.length - 1; i++){
-		let small_array = []
-		let dirtCoordinate = result[i].split(" ")
-
-		let x_dirt = parseInt(dirtCoordinate[0], 10)
-		let y_dirt = parseInt(dirtCoordinate[1], 10)
-
-		small_array.push(x_dirt)
-		small_array.push(y_dirt)
-		twoDimensionArray.push(small_array)
-	}
-
-	let rumba = new Robot(x, y, twoDimensionArray)
-	rumba.obtainRoomDimensions(x_limit, y_limit)
-	rumba.processInstructions(result[result.length - 1])
-
-
-}
-
-
-module.exports = {twoDimensionArray, x_limit, y_limit, x, y, Robot, processFile, readFile}
-
+module.exports = {Robot, Room}

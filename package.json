@@ -4,12 +4,13 @@
   "description": "",
   "main": "hoover.js",
   "scripts": {
-    "test": "mocha"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "mocha": "^6.2.2"
-  }
+    "jest": "^24.9.0"
+  },
+  "dependencies": {}
 }
