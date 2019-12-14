@@ -127,14 +127,6 @@ describe("Process instructions", () => {
 })
 
 
-describe("Funtionality Test", () => {
-	test("Input Checks", () => {
 
-		expect(() => {
-			roomba.processInstructions(instructions)
-		}).toThrow(TypeError)
-	})
-
-})
 
 

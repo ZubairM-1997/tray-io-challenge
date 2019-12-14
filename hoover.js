@@ -48,7 +48,7 @@ class Robot{
 
 	   for (let i = 0; i < this.dirtpoint_array.length; i++){
 		   if(this.dirtpoint_array[i][0] > x_lim || this.dirtpoint_array[i][1] > y_lim){
-				throw new Error(`Dirtpoint cordinates ${this.dirtpoint_array[i][0]} , ${this.dirtpoint_array[i][1]} needs to lie within the room dimensins ${x_lim}, ${y_lim}`)
+				throw new Error(`Dirtpoint cordinates ${this.dirtpoint_array[i][0]} , ${this.dirtpoint_array[i][1]} needs to lie within the room dimensions ${x_lim}, ${y_lim}`)
 		   }
 		   else if(this.dirtpoint_array[i][0] < 0 || this.dirtpoint_array[i][1] < 0){
 				throw new Error(`Dirtpoint cordinates, ${this.dirtpoint_array[i][0]} , ${this.dirtpoint_array[i][1]} cannot be less that 0 `)
