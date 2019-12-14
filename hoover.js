@@ -40,19 +40,18 @@ class Robot{
 			throw Error("Coordinates should not be integers")
 		}
 
-		let totalPoints = (x_lim * y_lim) + (x_lim + y_lim) + 1
-
-
-		if(typeof x_lim !== "number" && typeof y_lim !== "number"){
+		if (typeof x_lim !== "number" && typeof y_lim !== "number"){
 			throw new Error("You did not enter integers for the coordinates")
 	   }
 
 	   if (x_lim < this.x && y_lim < this.y){
-		throw new Error("The room dimensions cannot be less than the initial position of the hoover")
+			throw new Error("The room dimensions cannot be less than the initial position of the hoover")
 	   }
 
-	   if(totalPoints < this.dirtpoint_array.length){
-			throw new Error("The number of dirtpoints cannot be greater than the area of the room")
+	   for (let i = 0; i < this.dirtpoint_array.length; i++){
+		   if(this.dirtpoint_array[i][0] > x_lim && this.dirtpoint_array[i][1] > y_lim){
+				throw new Error("The room must contain all the dirtpoints")
+		   }
 	   }
 
 		this.roomDimensions = new Room(x_lim, y_lim);
@@ -142,9 +141,8 @@ class Robot{
 
 }
 
-// Type checks on input
-// duplicates
-// floats/decimals
+
+
 
 
 
